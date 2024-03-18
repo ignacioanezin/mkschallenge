@@ -1,9 +1,10 @@
 import React from 'react';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
 import { Container, SocialUserContainer, Icon, Username, Counter, FollowersText, TodayCounter } from './SocialCard.styles.ts'; // Assuming you have styled components for these elements
+import { getColor } from '../../helpers/getColor.ts';
 
 interface SocialCardProps {
-  onClick?: () => void; // onClick prop with a callback function
+  onClick?: () => void;
   socialIconUrl: string;
   username: string;
   counter: number;
@@ -13,9 +14,6 @@ interface SocialCardProps {
   borderTopColor: string;
 }
 
-/**
- * SocialCard component displays a social card with user information and statistics.
- */
 export const SocialCard: React.FC<SocialCardProps> = ({
     onClick,
     socialIconUrl,
@@ -27,15 +25,7 @@ export const SocialCard: React.FC<SocialCardProps> = ({
     borderTopColor,
 }) => {
 
-    /**
-     * Gets the color based on the first character of the todayCounter string.
-     * @param todayCounter - The todayCounter string.
-     * @returns The color string ('green' or 'red').
-     */
-    const getColor = (todayCounter: string): string => {
-        const symbol = todayCounter.charAt(0);
-        return symbol === '▲' ? 'green' : 'red';
-    };
+    const todayCounterColor = getColor(todayCounter);
 
     return (
         <ThemeProvider theme={theme}>
@@ -46,7 +36,7 @@ export const SocialCard: React.FC<SocialCardProps> = ({
                 </SocialUserContainer>
                 <Counter>{counter}</Counter>
                 <FollowersText>{followersText}</FollowersText>
-                <TodayCounter color={getColor(todayCounter)}>{todayCounter} Today</TodayCounter>
+                <TodayCounter color={todayCounterColor}>{todayCounter} Today</TodayCounter>
             </Container>
         </ThemeProvider>
     );

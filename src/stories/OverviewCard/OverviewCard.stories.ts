@@ -1,35 +1,31 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { SocialCard } from './SocialCard';
+import { OverviewCard } from './OverviewCard'; // Assuming this is your OverviewCard component
 import lightTheme from '../../theme/lightTheme';
 import darkTheme from '../../theme/darkTheme';
 import type { DefaultTheme } from 'styled-components';
 import FacebookIcon from '../../assets/icon-facebook.svg';
 
 const meta: Meta = {
-  title: 'Components/SocialCard',
-  component: SocialCard,
+  title: 'Components/OverviewCard',
+  component: OverviewCard,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
   argTypes: {
     socialIconUrl: { control: 'text' },
-    username: { control: 'text' },
+    statistic: { control: 'text' },
     counter: { control: 'number' },
-    followersText: { control: 'text' },
-    todayCounter: { control: 'text' },
+    porcentage: { control: 'text' },
     onClick: { action: 'clicked' },
-    borderTopColor: { control: 'color' },
   },
   args: {
     socialIconUrl: FacebookIcon,
-    username: '@nathanf',
-    counter: 1987,
-    followersText: 'Followers',
-    todayCounter: '▲ 12',
+    statistic: 'Page Views',
+    counter: 87,
+    porcentage: '▲ 3%',
     theme: lightTheme,
     onClick: () => alert('Button clicked'),
-    borderTopColor: lightTheme.colors.primary.facebook,
   },
 };
 

@@ -1,7 +1,12 @@
-import React from 'react';
-import { DefaultTheme, ThemeProvider } from 'styled-components';
-import { Container, TopContainer, BottomContainer, Icon, Statistic, Counter, Porcentage } from './OverviewCard.styles.ts'; // Assuming you have styled components for these elements
-import { getColor } from '../../helpers/getColor.ts';
+import React from "react";
+import {
+  Container,
+  TopContainer,
+  BottomContainer,
+  Icon,
+} from "./OverviewCard.styles.ts"; // Assuming you have styled components for these elements
+import { getColor } from "../../helpers/getColor.ts";
+import Typography from "../Typography/Typography.tsx";
 
 interface OverviewCardProps {
   onClick?: () => void;
@@ -9,34 +14,33 @@ interface OverviewCardProps {
   statistic: string;
   counter: number;
   porcentage: string;
-  theme: DefaultTheme;
 }
 
-
 export const OverviewCard: React.FC<OverviewCardProps> = ({
-    onClick,
-    socialIconUrl,
-    statistic,
-    counter,
-    porcentage,
-    theme,
+  onClick,
+  socialIconUrl,
+  statistic,
+  counter,
+  porcentage,
 }) => {
+  const porcentageColor = getColor(porcentage);
 
-    const porcentageColor = getColor(porcentage);
-
-    return (
-        <ThemeProvider theme={theme}>
-            <Container onClick={onClick} >
-                <TopContainer>
-                    <Statistic>{statistic}</Statistic>
-                    <Icon src={socialIconUrl} alt="Social Icon" />
-                </TopContainer>
-                <BottomContainer>
-                    <Counter>{counter}</Counter>
-                    <Porcentage color={porcentageColor}>{porcentage}</Porcentage>
-                </BottomContainer>
-            </Container>
-        </ThemeProvider>
-    );
+  return (
+    <Container onClick={onClick}>
+      <TopContainer>
+        <Typography size="small" weight="bold" variant="secondary">
+          {statistic}
+        </Typography>
+        <Icon src={socialIconUrl} alt="Social Icon" />
+      </TopContainer>
+      <BottomContainer>
+        <Typography size="huge" weight="bold" variant="primary">
+          {counter}
+        </Typography>
+        <Typography size="extraSmall" weight="bold" variant={porcentageColor}>
+          {porcentage}
+        </Typography>
+      </BottomContainer>
+    </Container>
+  );
 };
-

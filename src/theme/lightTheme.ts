@@ -22,12 +22,6 @@ const lightTheme = {
         chart: 'hsl(243, 51%, 70%)',
       },
     },
-    typography: {
-      bodyCopySize: '14px',
-      fontFamily: 'Inter, sans-serif',
-      fontWeightRegular: 400,
-      fontWeightBold: 700,
-    },
   };
   
   export default lightTheme;

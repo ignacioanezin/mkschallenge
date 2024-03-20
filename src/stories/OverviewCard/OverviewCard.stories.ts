@@ -1,8 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { OverviewCard } from './OverviewCard'; // Assuming this is your OverviewCard component
-import lightTheme from '../../theme/lightTheme';
-import darkTheme from '../../theme/darkTheme';
-import type { DefaultTheme } from 'styled-components';
 import FacebookIcon from '../../assets/icon-facebook.svg';
 
 const meta: Meta = {
@@ -24,7 +21,6 @@ const meta: Meta = {
     statistic: 'Page Views',
     counter: 87,
     porcentage: '▲ 3%',
-    theme: lightTheme,
     onClick: () => alert('Button clicked'),
   },
 };
@@ -32,14 +28,6 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const LightTheme: Story = {
-  args: {
-    theme: lightTheme as DefaultTheme,
-  },
-};
-
-export const DarkTheme: Story = {
-  args: {
-    theme: darkTheme as DefaultTheme,
-  },
+export const OverviewCardExample: Story = {
+  
 };

@@ -13,7 +13,6 @@ border-radius: 4px;
 align-items: center;
 display: flex;
 flex-direction: column;
-font-family: ${(props) => props.theme.typography.fontFamily};
 cursor: pointer;
 transition: background-color 0.3s ease-in-out;
 &:hover {
@@ -34,35 +33,3 @@ width: 20px;
 height: 20px;
 `;
 
-export const Username = styled.p`
-color: ${(props) => props.theme.colors.neutral.textSecondary};
-font-weight: ${(props) => props.theme.typography.fontWeightBold};
-font-size: 14px;
-margin: 0;
-`;
-
-export const Counter = styled.p`
-color: ${(props) => props.theme.colors.neutral.textPrimary};
-font-weight: ${(props) => props.theme.typography.fontWeightBold};
-font-size: 52px;
-margin: 20px 0 0 0;
-`;
-
-export const FollowersText = styled.p`
-color: ${(props) => props.theme.colors.neutral.textSecondary};
-font-weight: ${(props) => props.theme.typography.fontWeightRegular};
-text-transform: uppercase;
-letter-spacing: .15rem;
-margin: 0;
-`;
-
-interface TodayCounterProps {
-    color: string;
-  }
-
-export const TodayCounter = styled.p<TodayCounterProps>`
-color: ${(props) => props.color === 'green' ? props.theme.colors.primary.limeGreen : props.theme.colors.primary.brightRed};
-font-weight: ${(props) => props.theme.typography.fontWeightBold};
-font-size: 14px;
-margin-top: 30px;
-`;

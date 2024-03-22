@@ -13,14 +13,14 @@ const meta: Meta = {
     socialIconUrl: { control: 'text' },
     statistic: { control: 'text' },
     counter: { control: 'number' },
-    porcentage: { control: 'text' },
+    porcentage: { control: 'number' },
     onClick: { action: 'clicked' },
   },
   args: {
     socialIconUrl: FacebookIcon,
     statistic: 'Page Views',
     counter: 87,
-    porcentage: '▲ 3%',
+    porcentage: 3,
     onClick: () => alert('Button clicked'),
   },
 };

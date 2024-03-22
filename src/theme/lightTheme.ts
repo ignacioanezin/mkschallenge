@@ -20,6 +20,8 @@ const lightTheme = {
         textPrimary: 'hsl(230, 17%, 14%)',
         textSecondary: 'hsl(228, 12%, 44%)',
         chart: 'hsl(243, 51%, 70%)',
+        chartDotSroke: 'hsl(243, 51%, 70%, 0.7)',
+        chartText: 'hsl(226, 20%, 66%)',
       },
     },
   };

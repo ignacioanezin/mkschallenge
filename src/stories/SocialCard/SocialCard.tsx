@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, SocialUserContainer, Icon } from "./SocialCard.styles.ts"; // Assuming you have styled components for these elements
-import { getColor } from "../../helpers/getColor.ts";
+import { isPositive } from "../../helpers/isPositive.ts";
 import Typography from "../Typography/Typography.tsx";
 
 interface SocialCardProps {
@@ -9,7 +9,7 @@ interface SocialCardProps {
   username: string;
   counter: number;
   followersText: string;
-  todayCounter: string;
+  todayCounter: number;
   borderTopColor: string;
 }
 
@@ -22,18 +22,18 @@ export const SocialCard: React.FC<SocialCardProps> = ({
   todayCounter,
   borderTopColor,
 }) => {
-  const todayCounterColor = getColor(todayCounter);
+  const todayCounterValue = isPositive(todayCounter);
 
   return (
     <Container borderTopColor={borderTopColor} onClick={onClick}>
       <SocialUserContainer>
         <Icon src={socialIconUrl} alt="Social Icon" />
-        <Typography size="small" weight="bold" variant="secondary">
+        <Typography size="s" weight="bold" variant="secondary">
           {username}
         </Typography>
       </SocialUserContainer>
       <Typography
-        size="giant"
+        size="xxxl"
         weight="bold"
         variant="primary"
         style={{ marginTop: "20px" }}
@@ -41,7 +41,7 @@ export const SocialCard: React.FC<SocialCardProps> = ({
         {counter}
       </Typography>
       <Typography
-        size="small"
+        size="s"
         weight="regular"
         variant="secondary"
         letterSpacing
@@ -49,10 +49,10 @@ export const SocialCard: React.FC<SocialCardProps> = ({
         {followersText}
       </Typography>
       <Typography
-        size="small"
+        size="s"
         weight="bold"
-        variant={todayCounterColor}
         style={{ marginTop: "30px" }}
+        positive={todayCounterValue}
       >
         {todayCounter} Today
       </Typography>

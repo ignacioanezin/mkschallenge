@@ -31,6 +31,7 @@ const meta: Meta = {
       },
     },
     style: { control: "object" },
+    positive: { control: "boolean" },
   },
   args: {
     size: "Medium",

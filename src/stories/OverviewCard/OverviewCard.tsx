@@ -1,11 +1,10 @@
 import React from "react";
 import {
   Container,
-  TopContainer,
-  BottomContainer,
+  FlexSpaceBetween,
   Icon,
-} from "./OverviewCard.styles.ts"; // Assuming you have styled components for these elements
-import { getColor } from "../../helpers/getColor.ts";
+} from "./OverviewCard.styles.ts"; 
+import { isPositive } from "../../helpers/isPositive.ts";
 import Typography from "../Typography/Typography.tsx";
 
 interface OverviewCardProps {
@@ -13,7 +12,7 @@ interface OverviewCardProps {
   socialIconUrl: string;
   statistic: string;
   counter: number;
-  porcentage: string;
+  porcentage: number;
 }
 
 export const OverviewCard: React.FC<OverviewCardProps> = ({
@@ -23,24 +22,24 @@ export const OverviewCard: React.FC<OverviewCardProps> = ({
   counter,
   porcentage,
 }) => {
-  const porcentageColor = getColor(porcentage);
+  const porcentageValue = isPositive(porcentage);
 
   return (
     <Container onClick={onClick}>
-      <TopContainer>
-        <Typography size="small" weight="bold" variant="secondary">
+      <FlexSpaceBetween>
+        <Typography size="s" weight="bold" variant="secondary">
           {statistic}
         </Typography>
         <Icon src={socialIconUrl} alt="Social Icon" />
-      </TopContainer>
-      <BottomContainer>
-        <Typography size="huge" weight="bold" variant="primary">
+      </FlexSpaceBetween>
+      <FlexSpaceBetween>
+        <Typography size="xl" weight="bold" variant="primary">
           {counter}
         </Typography>
-        <Typography size="extraSmall" weight="bold" variant={porcentageColor}>
+        <Typography size="xs" weight="bold" positive={porcentageValue} porcentage>
           {porcentage}
         </Typography>
-      </BottomContainer>
+      </FlexSpaceBetween>
     </Container>
   );
 };

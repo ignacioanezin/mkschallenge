@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/react-in-jsx-scope */
 import { Meta, StoryObj } from '@storybook/react';
 import { Chart, ChartProps } from './Chart'; 
 

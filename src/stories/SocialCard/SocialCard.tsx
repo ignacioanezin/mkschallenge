@@ -1,16 +1,18 @@
 import React from "react";
-import { Container, SocialUserContainer, Icon } from "./SocialCard.styles.ts"; // Assuming you have styled components for these elements
-import { isPositive } from "../../helpers/isPositive.ts";
+import { Container, SocialUserContainer, Icon, BorderTop } from "./SocialCard.styles.ts"; // Assuming you have styled components for these elements
+import { analizeNumber } from "../../helpers/analizeNumber.ts";
 import Typography from "../Typography/Typography.tsx";
 
-interface SocialCardProps {
+export interface SocialCardProps {
   onClick?: () => void;
   socialIconUrl: string;
   username: string;
-  counter: number;
+  counter: number | string;
   followersText: string;
   todayCounter: number;
-  borderTopColor: string;
+  borderTopColor: string | string[];
+  borderGradient?: boolean;
+  modalContentKey: string;
 }
 
 export const SocialCard: React.FC<SocialCardProps> = ({
@@ -21,11 +23,15 @@ export const SocialCard: React.FC<SocialCardProps> = ({
   followersText,
   todayCounter,
   borderTopColor,
+  borderGradient
 }) => {
-  const todayCounterValue = isPositive(todayCounter);
+
+
+  const { originalWasPositive, absoluteValue } = analizeNumber(todayCounter);
 
   return (
-    <Container borderTopColor={borderTopColor} onClick={onClick}>
+    <Container onClick={onClick}>
+      <BorderTop borderTopColor={borderTopColor} borderGradient={borderGradient}/>
       <SocialUserContainer>
         <Icon src={socialIconUrl} alt="Social Icon" />
         <Typography size="s" weight="bold" variant="secondary">
@@ -52,9 +58,9 @@ export const SocialCard: React.FC<SocialCardProps> = ({
         size="s"
         weight="bold"
         style={{ marginTop: "30px" }}
-        positive={todayCounterValue}
+        positive={originalWasPositive}
       >
-        {todayCounter} Today
+        {absoluteValue} Today
       </Typography>
     </Container>
   );

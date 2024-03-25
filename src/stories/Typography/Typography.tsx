@@ -12,7 +12,7 @@ export interface TypographyProps {
     tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
     style?: React.CSSProperties;
     positive?: boolean;
-    porcentage?: boolean;
+    percentage?: boolean;
 }
 
 
@@ -25,7 +25,7 @@ const Typography = ({
   letterSpacing,
   style,
   positive,
-  porcentage
+  percentage
 }: TypographyProps) => {
   const renderIcon = positive ? IconUp : IconDown;
   return (
@@ -42,7 +42,7 @@ const Typography = ({
               <IconWrapper src={renderIcon}/>
           )}
           {children}
-          {porcentage && '%'}
+          {percentage && '%'}
       </StyledTypography>
   );
 };

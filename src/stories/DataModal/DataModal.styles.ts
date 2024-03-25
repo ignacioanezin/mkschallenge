@@ -104,6 +104,11 @@ export const TitleAndSocialContainer = styled.div`
 display: flex;
 flex-direction: column;
 gap: 10px;
+max-width: 260px;
+
+@media only screen and (min-width: 425px) {
+max-width: 100%;
+  }
 `;
 
 export const DataContainer = styled.div`
@@ -118,7 +123,6 @@ export const DataContainer = styled.div`
 
   @media only screen and (min-width: 1024px) {
     flex-direction: row;
-
     gap: 40px;
   }
 `;  

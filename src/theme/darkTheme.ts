@@ -20,6 +20,8 @@ const darkTheme = {
         textPrimary: 'hsl(0, 0%, 100%)',
         textSecondary: 'hsl(228, 34%, 66%)',
         chart: 'hsl(243, 51%, 70%)',
+        chartDotSroke: 'hsl(243, 51%, 70%, 0.7)',
+        chartText: 'hsl(226, 20%, 66%)',
       },
     },
   };

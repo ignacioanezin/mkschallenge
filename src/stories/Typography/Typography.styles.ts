@@ -50,6 +50,7 @@ export const StyledTypography = styled(
     letter-spacing: ${(props) => (props.letterSpacing ? '.15rem' : '0')};
     display: flex;
     align-items: center;
+    
 `;
 
 

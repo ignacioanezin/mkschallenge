@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   ModalBackground,
   ModalContainer,
@@ -11,15 +11,15 @@ import {
   Icon,
 } from "./DataModal.styles.ts"; 
 import Typography from "../Typography/Typography.tsx";
-import { isPositive } from "../../helpers/isPositive.ts";
+import { analizeNumber } from "../../helpers/analizeNumber.ts";
 import { Chart, FollowerDataPoint } from "../Chart/Chart.tsx";
 import {CloseIcon} from "./CloseIcon.tsx";
 
-interface DataModalProps {
+export interface DataModalProps {
   modalTitle: string;
   socialIconUrl: string;
   username: string;
-  totalCounter: number;
+  totalCounter: number | string;
   totalFollowersText: string;
   tenDaysCounter: number;
   tenDaysFollowersText: string;
@@ -27,7 +27,7 @@ interface DataModalProps {
   todayFollowersText: string;
   dates: string;
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   data: FollowerDataPoint[];
 }
 
@@ -46,14 +46,32 @@ export const DataModal: React.FC<DataModalProps> = ({
   onClose,
   isOpen,
 }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose && onClose();
+      }
+    };
 
-  const todayCounterValue = isPositive(todayCounter);
-  const tenDaysCounterValue = isPositive(tenDaysCounter);
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
+  const { originalWasPositive: todayCounterWasPositive, absoluteValue: todayCounterAbsoluteValue } = analizeNumber(todayCounter);
+  const { originalWasPositive: tenDaysCounterWasPositive, absoluteValue: tenDaysCounterAbsoluteValue } = analizeNumber(tenDaysCounter);
 
   return (
     <ModalBackground isOpen={isOpen}>
-      <ModalContainer>
+      <ModalContainer ref={modalRef}>
       <CloseIconContainer onClick={onClose}>
         <CloseIcon />
       </CloseIconContainer>
@@ -64,7 +82,7 @@ export const DataModal: React.FC<DataModalProps> = ({
             </Typography>
             <FlexContainer columnGap="10px">
               <Icon src={socialIconUrl} alt="Social media icon" />
-              <Typography variant="secondary" size="s" weight="bold" tag="p">
+              <Typography variant="secondary" size="s" weight="bold" tag="p" style={{minWidth: "80px"}}>
                 {username}
               </Typography>
             </FlexContainer>
@@ -86,12 +104,12 @@ export const DataModal: React.FC<DataModalProps> = ({
             </FlexContainer>
             <FlexContainer columnGap="15px">
               <Typography
-                positive={tenDaysCounterValue}
+                positive={tenDaysCounterWasPositive}
                 size="xxl"
                 weight="bold"
                 tag="p"
               >
-                {tenDaysCounter}
+                {tenDaysCounterAbsoluteValue}
               </Typography>
               <Typography
                 variant="secondary"
@@ -105,12 +123,12 @@ export const DataModal: React.FC<DataModalProps> = ({
             </FlexContainer>
             <FlexContainer columnGap="15px">
               <Typography
-                positive={todayCounterValue}
+                positive={todayCounterWasPositive}
                 size="xxl"
                 weight="bold"
                 tag="p"
               >
-                {todayCounter}
+                {todayCounterAbsoluteValue}
               </Typography>
               <Typography
                 variant="secondary"

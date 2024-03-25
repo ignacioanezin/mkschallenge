@@ -4,15 +4,16 @@ import {
   FlexSpaceBetween,
   Icon,
 } from "./OverviewCard.styles.ts"; 
-import { isPositive } from "../../helpers/isPositive.ts";
+import { analizeNumber } from "../../helpers/analizeNumber.ts";
 import Typography from "../Typography/Typography.tsx";
 
-interface OverviewCardProps {
+export interface OverviewCardProps {
   onClick?: () => void;
   socialIconUrl: string;
   statistic: string;
-  counter: number;
-  porcentage: number;
+  counter: number | string;
+  percentage: number;
+  modalContentKey: string;
 }
 
 export const OverviewCard: React.FC<OverviewCardProps> = ({
@@ -20,9 +21,9 @@ export const OverviewCard: React.FC<OverviewCardProps> = ({
   socialIconUrl,
   statistic,
   counter,
-  porcentage,
+  percentage,
 }) => {
-  const porcentageValue = isPositive(porcentage);
+  const { originalWasPositive, absoluteValue } = analizeNumber(percentage);
 
   return (
     <Container onClick={onClick}>
@@ -36,8 +37,8 @@ export const OverviewCard: React.FC<OverviewCardProps> = ({
         <Typography size="xl" weight="bold" variant="primary">
           {counter}
         </Typography>
-        <Typography size="xs" weight="bold" positive={porcentageValue} porcentage>
-          {porcentage}
+        <Typography size="xs" weight="bold" positive={originalWasPositive} percentage>
+          {absoluteValue}
         </Typography>
       </FlexSpaceBetween>
     </Container>

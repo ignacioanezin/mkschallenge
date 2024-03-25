@@ -1,13 +1,9 @@
 import styled from 'styled-components';
 
-interface ContainerProps {
-    borderTopColor: string;
-  }
 
-export const Container = styled.div<ContainerProps>`
+export const Container = styled.div`
   width: 254px;
 height: 216px;
-border-top: 5px solid ${(props) => props.borderTopColor};
 background-color: ${(props) => props.theme.colors.neutral.cardBg};
 border-radius: 4px;
 align-items: center;
@@ -18,6 +14,17 @@ transition: background-color 0.3s ease-in-out;
 &:hover {
     background-color: ${(props) => props.theme.colors.neutral.cardBgHover};
 }
+`;
+interface BorderTopProps {
+  borderTopColor: string | string[];
+  borderGradient?: boolean;
+}
+
+export const BorderTop = styled.div<BorderTopProps>`
+width: 100%;
+height: 5px;
+border-radius: 4px 4px 0px 0px;
+background: ${(props) => props.borderGradient ? `linear-gradient(to right, ${props.borderTopColor})` : props.borderTopColor};
 `;
 
 export const SocialUserContainer = styled.div`
